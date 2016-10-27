@@ -1,4 +1,4 @@
-#include <Windows.h>
+п»ї#include <Windows.h>
 #include <tchar.h>
 #include <fstream>
 #include <string>
@@ -18,46 +18,46 @@ std::string fts(int a) {
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 TCHAR WinName[] = _T("MainFrame");
 
-int APIENTRY _tWinMain(HINSTANCE This,	HINSTANCE Prev,	LPTSTR cmd,	int mode)                         // Режим отображения окна
+int APIENTRY _tWinMain(HINSTANCE This,	HINSTANCE Prev,	LPTSTR cmd,	int mode)                         // Р РµР¶РёРј РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РѕРєРЅР°
 {
-	HWND hWnd;              // Дескриптор главного окна программы
-	MSG msg;                // Структура для хранения сообщения
-	WNDCLASSEX wc;  // Класс окна
-				  // Определение класса окна
+	HWND hWnd;              // Р”РµСЃРєСЂРёРїС‚РѕСЂ РіР»Р°РІРЅРѕРіРѕ РѕРєРЅР° РїСЂРѕРіСЂР°РјРјС‹
+	MSG msg;                // РЎС‚СЂСѓРєС‚СѓСЂР° РґР»СЏ С…СЂР°РЅРµРЅРёСЏ СЃРѕРѕР±С‰РµРЅРёСЏ
+	WNDCLASSEX wc;  // РљР»Р°СЃСЃ РѕРєРЅР°
+				  // РћРїСЂРµРґРµР»РµРЅРёРµ РєР»Р°СЃСЃР° РѕРєРЅР°
 	wc.hInstance = This;
-	wc.lpszClassName = WinName;                // Имя класса окна
-	wc.lpfnWndProc = WndProc;                  // Функция окна
-	wc.style = CS_HREDRAW | CS_VREDRAW;       // Стиль окна
+	wc.lpszClassName = WinName;                // РРјСЏ РєР»Р°СЃСЃР° РѕРєРЅР°
+	wc.lpfnWndProc = WndProc;                  // Р¤СѓРЅРєС†РёСЏ РѕРєРЅР°
+	wc.style = CS_HREDRAW | CS_VREDRAW;       // РЎС‚РёР»СЊ РѕРєРЅР°
 	wc.hIcon = LoadIcon(wc.hInstance, _T("IDI_ICON1"));
 	wc.hIconSm = (HICON)LoadImage(GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_ICON1), IMAGE_ICON, 32, 32, 0);
 	wc.hCursor = LoadCursor(wc.hInstance, MAKEINTRESOURCE(IDC_CURSOR1));
-	wc.lpszMenuName = NULL;       // Нет меню
-	wc.cbClsExtra = 0;            // Нет дополнительных данных класса
-	wc.cbWndExtra = 0;            // Нет дополнительных данных окна
-								  // Заполнение окна белым цветом
+	wc.lpszMenuName = NULL;       // РќРµС‚ РјРµРЅСЋ
+	wc.cbClsExtra = 0;            // РќРµС‚ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹С… РґР°РЅРЅС‹С… РєР»Р°СЃСЃР°
+	wc.cbWndExtra = 0;            // РќРµС‚ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹С… РґР°РЅРЅС‹С… РѕРєРЅР°
+								  // Р—Р°РїРѕР»РЅРµРЅРёРµ РѕРєРЅР° Р±РµР»С‹Рј С†РІРµС‚РѕРј
 	wc.hbrBackground = (HBRUSH)(COLOR_WINDOW);
 	wc.cbSize = sizeof(wc);
-	if (!RegisterClassEx(&wc)) return 0;   // Регистрация класса окна
-										 // Создание окна
-	hWnd = CreateWindow(WinName, // Имя класса окна
-		_T("Вращающийся куб"),  // Заголовок окна
+	if (!RegisterClassEx(&wc)) return 0;   // Р РµРіРёСЃС‚СЂР°С†РёСЏ РєР»Р°СЃСЃР° РѕРєРЅР°
+										 // РЎРѕР·РґР°РЅРёРµ РѕРєРЅР°
+	hWnd = CreateWindow(WinName, // РРјСЏ РєР»Р°СЃСЃР° РѕРєРЅР°
+		_T("Р’СЂР°С‰Р°СЋС‰РёР№СЃСЏ РєСѓР±"),  // Р—Р°РіРѕР»РѕРІРѕРє РѕРєРЅР°
 		WS_OVERLAPPED | WS_CAPTION |
 		WS_SYSMENU | WS_MINIMIZEBOX |
-		WS_MAXIMIZEBOX,         // Стиль окна
+		WS_MAXIMIZEBOX,         // РЎС‚РёР»СЊ РѕРєРЅР°
 		CW_USEDEFAULT, // x
-		CW_USEDEFAULT, // y   Размеры окна
+		CW_USEDEFAULT, // y   Р Р°Р·РјРµСЂС‹ РѕРєРЅР°
 		sizex, // width
 		sizex, // Height
-		HWND_DESKTOP, // Дескриптор родительского окна
+		HWND_DESKTOP, // Р”РµСЃРєСЂРёРїС‚РѕСЂ СЂРѕРґРёС‚РµР»СЊСЃРєРѕРіРѕ РѕРєРЅР°
 		NULL,
-		This,         // Дескриптор приложения
+		This,         // Р”РµСЃРєСЂРёРїС‚РѕСЂ РїСЂРёР»РѕР¶РµРЅРёСЏ
 		NULL);
-	ShowWindow(hWnd, mode); // Показать окно
-							// Цикл обработки сообщений
+	ShowWindow(hWnd, mode); // РџРѕРєР°Р·Р°С‚СЊ РѕРєРЅРѕ
+							// Р¦РёРєР» РѕР±СЂР°Р±РѕС‚РєРё СЃРѕРѕР±С‰РµРЅРёР№
 	while (GetMessage(&msg, NULL, 0, 0))
 	{
-		TranslateMessage(&msg); // Функция трансляции кодов нажатой клавиши
-		DispatchMessage(&msg);  // Посылает сообщение функции WndProc()
+		TranslateMessage(&msg); // Р¤СѓРЅРєС†РёСЏ С‚СЂР°РЅСЃР»СЏС†РёРё РєРѕРґРѕРІ РЅР°Р¶Р°С‚РѕР№ РєР»Р°РІРёС€Рё
+		DispatchMessage(&msg);  // РџРѕСЃС‹Р»Р°РµС‚ СЃРѕРѕР±С‰РµРЅРёРµ С„СѓРЅРєС†РёРё WndProc()
 	}
 	return 0;
 }
@@ -177,7 +177,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 					color = true;
 					SetWindowText((HWND)lParam, "Frame Cube");
 				}
-				else MessageBox(hWnd, "Представление аксонометрической проекции в цвете временно не поддерживается в данной версии программы. \r\n", "Предупреждение!", NULL);
+				else MessageBox(hWnd, "РџСЂРµРґСЃС‚Р°РІР»РµРЅРёРµ Р°РєСЃРѕРЅРѕРјРµС‚СЂРёС‡РµСЃРєРѕР№ РїСЂРѕРµРєС†РёРё РІ С†РІРµС‚Рµ РІСЂРµРјРµРЅРЅРѕ РЅРµ РїРѕРґРґРµСЂР¶РёРІР°РµС‚СЃСЏ РІ РґР°РЅРЅРѕР№ РІРµСЂСЃРёРё РїСЂРѕРіСЂР°РјРјС‹. \r\n", "РџСЂРµРґСѓРїСЂРµР¶РґРµРЅРёРµ!", NULL);
 			} 
 			else {
 				color = false;
@@ -191,15 +191,15 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				akson == false ? akson = true : akson = false;
 				InvalidateRgn(hWnd, rgn, true);
 			}
-			else MessageBox(hWnd, "Представление аксонометрической проекции в цвете временно не поддерживается в данной версии программы. \r\n", "Предупреждение!", NULL);
+			else MessageBox(hWnd, "РџСЂРµРґСЃС‚Р°РІР»РµРЅРёРµ Р°РєСЃРѕРЅРѕРјРµС‚СЂРёС‡РµСЃРєРѕР№ РїСЂРѕРµРєС†РёРё РІ С†РІРµС‚Рµ РІСЂРµРјРµРЅРЅРѕ РЅРµ РїРѕРґРґРµСЂР¶РёРІР°РµС‚СЃСЏ РІ РґР°РЅРЅРѕР№ РІРµСЂСЃРёРё РїСЂРѕРіСЂР°РјРјС‹. \r\n", "РџСЂРµРґСѓРїСЂРµР¶РґРµРЅРёРµ!", NULL);
 			}
 		if (lParam == (LPARAM)about) {
-			MessageBox(hWnd, "Разработчик: Сергеев Александр \r\nГруппа: И942\r\nКурс: 2\r\nОписание:    "
-				"Данная программа представляет собой модель куба, нарисованную без использования графических и 3D библиотек. Куб представлен в двух моделях: пространственная "
-				"и аксонометрическая. Обе модели можно вращать по двум координатным осям при помощи клавиш-стрелок, мыши или автоматически, при помощи специальных кнопок в окне программы."
-				" Скорость вращения также можно регулировать. "
-				"Куб имеет две формы представления: каркас и в цвете. Цветное представление пока что доступно только для пространственной модели."
-				"", "Об этой программе", NULL);
+			MessageBox(hWnd, "Р Р°Р·СЂР°Р±РѕС‚С‡РёРє: РЎРµСЂРіРµРµРІ РђР»РµРєСЃР°РЅРґСЂ \r\nР“СЂСѓРїРїР°: Р942\r\nРљСѓСЂСЃ: 2\r\nРћРїРёСЃР°РЅРёРµ:    "
+				"Р”Р°РЅРЅР°СЏ РїСЂРѕРіСЂР°РјРјР° РїСЂРµРґСЃС‚Р°РІР»СЏРµС‚ СЃРѕР±РѕР№ РјРѕРґРµР»СЊ РєСѓР±Р°, РЅР°СЂРёСЃРѕРІР°РЅРЅСѓСЋ Р±РµР· РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ РіСЂР°С„РёС‡РµСЃРєРёС… Рё 3D Р±РёР±Р»РёРѕС‚РµРє. РљСѓР± РїСЂРµРґСЃС‚Р°РІР»РµРЅ РІ РґРІСѓС… РјРѕРґРµР»СЏС…: РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРµРЅРЅР°СЏ "
+				"Рё Р°РєСЃРѕРЅРѕРјРµС‚СЂРёС‡РµСЃРєР°СЏ. РћР±Рµ РјРѕРґРµР»Рё РјРѕР¶РЅРѕ РІСЂР°С‰Р°С‚СЊ РїРѕ РґРІСѓРј РєРѕРѕСЂРґРёРЅР°С‚РЅС‹Рј РѕСЃСЏРј РїСЂРё РїРѕРјРѕС‰Рё РєР»Р°РІРёС€-СЃС‚СЂРµР»РѕРє, РјС‹С€Рё РёР»Рё Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё, РїСЂРё РїРѕРјРѕС‰Рё СЃРїРµС†РёР°Р»СЊРЅС‹С… РєРЅРѕРїРѕРє РІ РѕРєРЅРµ РїСЂРѕРіСЂР°РјРјС‹."
+				" РЎРєРѕСЂРѕСЃС‚СЊ РІСЂР°С‰РµРЅРёСЏ С‚Р°РєР¶Рµ РјРѕР¶РЅРѕ СЂРµРіСѓР»РёСЂРѕРІР°С‚СЊ. "
+				"РљСѓР± РёРјРµРµС‚ РґРІРµ С„РѕСЂРјС‹ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёСЏ: РєР°СЂРєР°СЃ Рё РІ С†РІРµС‚Рµ. Р¦РІРµС‚РЅРѕРµ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёРµ РїРѕРєР° С‡С‚Рѕ РґРѕСЃС‚СѓРїРЅРѕ С‚РѕР»СЊРєРѕ РґР»СЏ РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРµРЅРЅРѕР№ РјРѕРґРµР»Рё."
+				"", "РћР± СЌС‚РѕР№ РїСЂРѕРіСЂР°РјРјРµ", NULL);
 		}
 		SetFocus(hWnd);
 		break;
@@ -274,22 +274,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				int cy = static_cast<int>(cube.crdxy[id].y);
 				LineTo(hdc, cx + cubsd, cy + cubsd);
 			}
-			//
-			int x[4], y[4];
-			for (int j = 0; j < 4; j++) {
-				int id2 = cube.getidside(4, j);
-				x[j] = static_cast<int>(cube.crdxy[id2].x) + cubsd;
-				y[j] = static_cast<int>(cube.crdxy[id2].y) + cubsd;
-			}
-				POINT pt[4] = { { x[0], y[0] },{ x[1], y[1] },{ x[2], y[2] },{ x[3], y[3] } };
-				BeginPath(hdc);
-				Polyline(hdc, pt, 4);
-				CloseFigure(hdc);
-				EndPath(hdc);
-				SelectObject(hdc, hbrush[1]);
-				SetPolyFillMode(hdc, WINDING);
-				FillPath(hdc);
-		}/*
+		}
 		else {
 			for (int i = 0; i < 6; i++) {
 				int x[4], y[4];
@@ -310,7 +295,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 					FillPath(hdc);
 				}
 			}
-		}*/
+		}
 		MoveToEx(hdc, 100, 500, NULL);
 		LineTo(hdc, 100, 550);
 		MoveToEx(hdc, 100, 500, NULL);
